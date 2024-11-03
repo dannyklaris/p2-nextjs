@@ -6,6 +6,7 @@ import RegisterModal from "@/components/modal/RegisterModal";
 import LoginModal from "@/components/modal/LoginModal";
 import ToasterProvider from "@/providers/ToasterProvider";
 import getCurrentUser from "@/actions/getCurrentUser";
+import RentModal from "@/components/modal/RentModal";
 
 export const metadata: Metadata = {
   title: "Next Playground",
@@ -23,6 +24,7 @@ export default async function RootLayout({
       <body>
         <ClientOnly>
           <ToasterProvider />
+          <RentModal />
           <LoginModal />
           <RegisterModal />
           <Navbar currentUser={currentUser} />

@@ -9,6 +9,7 @@ import useLoginModal from "@/hooks/useLoginModal";
 import { SafeUser } from "@/types";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
+import useRentModal from "@/hooks/useRentModal";
 
 interface UserMenuProps {
   currentUser?: SafeUser | null;
@@ -19,6 +20,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const [isOpen, setIsOpen] = useState(false);
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
+  const rentModal = useRentModal();
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
@@ -36,15 +38,30 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
       document.removeEventListener("mousedown", handleClickOutside); // Cleanup on unmount
     };
   }, [handleClickOutside]);
+
+  const onRent = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen();
+    }
+    rentModal.onOpen();
+  }, [currentUser, loginModal, rentModal]);
   return (
     <div className="relative" ref={menuRef}>
-      <div
-        onClick={toggleOpen}
-        className="flex cursor-pointer items-center md:gap-2 md:rounded-full md:border-[1px] md:px-2 md:py-1"
-      >
-        <AiOutlineMenu size={26} />
-        <div className="hidden md:block">
-          <Avatar src={currentUser?.image} />
+      <div className="flex flex-row items-center gap-3">
+        <div
+          className="text-hidden w-44 cursor-pointer rounded-full border-[1px] px-2 py-2 text-center text-sm font-semibold transition hover:bg-neutral-100 md:block"
+          onClick={onRent}
+        >
+          List your items!
+        </div>
+        <div
+          onClick={toggleOpen}
+          className="flex cursor-pointer items-center md:gap-2 md:rounded-full md:border-[1px] md:px-2 md:py-1"
+        >
+          <AiOutlineMenu size={26} />
+          <div className="hidden md:block">
+            <Avatar src={currentUser?.image} />
+          </div>
         </div>
       </div>
       {/* making a navbar popup from burger menu */}
@@ -65,6 +82,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                   onClick={() => router.push("/listings")}
                   label="My listings"
                 />
+                <MenuItem onClick={rentModal.onOpen} label="List an item!" />
                 <hr />
                 <MenuItem onClick={() => signOut()} label="Logout" />
               </>
