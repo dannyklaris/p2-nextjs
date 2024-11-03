@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
+import ClientOnly from "@/components/global/ClientOnly";
+import RegisterModal from "@/components/modal/RegisterModal";
+import LoginModal from "@/components/modal/LoginModal";
 
 export const metadata: Metadata = {
   title: "Next Playground",
@@ -12,12 +15,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Only include React DevTools in development
-
   return (
     <html lang="en">
       <body>
-        <Navbar />
+        <ClientOnly>
+          <LoginModal />
+          <RegisterModal />
+          <Navbar />
+        </ClientOnly>
         {children}
       </body>
     </html>
