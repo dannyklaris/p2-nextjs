@@ -49,7 +49,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     <div className="relative" ref={menuRef}>
       <div className="flex flex-row items-center gap-3">
         <div
-          className="text-hidden w-44 cursor-pointer rounded-full border-[1px] px-2 py-2 text-center text-sm font-semibold transition hover:bg-neutral-100 md:block"
+          className="text-hidden hidden w-44 cursor-pointer rounded-full border-[1px] px-2 py-2 text-center text-sm font-semibold transition hover:bg-neutral-100 md:block"
           onClick={onRent}
         >
           List your items!
