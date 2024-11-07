@@ -42,7 +42,7 @@ const ListingReservation: React.FC<ListingReservationProps> = ({
       </div>
       <div className="flex flex-row items-center justify-between p-4 text-lg font-semibold">
         <div>Total</div>
-        <div>$ {totalPrice}</div>
+        <div>RM {totalPrice}</div>
       </div>
     </div>
   );
