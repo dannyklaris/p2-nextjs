@@ -1,4 +1,9 @@
+"use client";
+
 import Container from "@/components/global/Container";
+import ListingHead from "@/components/listings/ListingHead";
+import ListingInfo from "@/components/listings/ListingInfo";
+import ListingReservation from "@/components/listings/ListingReservation";
 import { categories } from "@/components/navbar/Categories";
 import useLoginModal from "@/hooks/useLoginModal";
 import { SafeListing, SafeReservation, SafeUser } from "@/types";
