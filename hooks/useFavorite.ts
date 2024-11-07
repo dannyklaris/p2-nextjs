@@ -18,7 +18,7 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
     const list = currentUser?.favoriteIds || [];
 
     return list.includes(listingId);
-  }, [currentUser]);
+  }, [currentUser, listingId]);
 
   const toggleFavorite = useCallback(
     async (e: React.MouseEvent<HTMLDivElement>) => {
@@ -33,13 +33,15 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
 
         if (hasFavorited) {
           request = () => axios.delete(`/api/favorites/${listingId}`);
+          toast.success("Successfully unfavorited your item!");
         } else {
           request = () => axios.post(`/api/favorites/${listingId}`);
+          toast.success("Successfully favorited your items!");
         }
 
         await request();
         router.refresh();
-        toast.success("Successfully favorited your items!");
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
         toast.error("Something went wrong.");
       }

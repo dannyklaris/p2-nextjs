@@ -55,8 +55,9 @@ const RentModal = () => {
       dynamic(() => import("../global/Map"), {
         ssr: false,
       }),
-    [location],
+    [],
   );
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
       shouldValidate: true,
@@ -120,6 +121,7 @@ const RentModal = () => {
         {categories.map((item) => (
           <div key={item.label} className="col-span-1">
             <CategoryInput
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               onClick={(category: any) => setCustomValue("category", category)}
               selected={category == item.label}
               label={item.label}
