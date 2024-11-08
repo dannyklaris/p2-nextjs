@@ -7,6 +7,7 @@ import LoginModal from "@/components/modal/LoginModal";
 import ToasterProvider from "@/providers/ToasterProvider";
 import getCurrentUser from "@/actions/getCurrentUser";
 import RentModal from "@/components/modal/RentModal";
+import SearchModal from "@/components/modal/SearchModal";
 
 export const metadata: Metadata = {
   title: "Next Playground",
@@ -24,6 +25,7 @@ export default async function RootLayout({
       <body>
         <ClientOnly>
           <ToasterProvider />
+          <SearchModal />
           <RentModal />
           <LoginModal />
           <RegisterModal />
